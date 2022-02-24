@@ -1,49 +1,38 @@
-from heapq import merge
 import numpy as np
-import math
-
-ayy = ([[6.3, 3.3], [5.8, 2.7], [7.1, 3.0], [6.3, 2.9], [6.5, 3.0], [7.6, 3.0], [4.9, 2.5], [7.3, 2.9], [6.7, 2.5], [7.2, 3.6], [6.5, 3.2], [6.4, 2.7], [6.8, 3.0], [5.7, 2.5], [5.8, 2.8], [6.4, 3.2], [6.5, 3.0], [7.7, 3.8], [7.7, 2.6], [6.0, 2.2], [6.9, 3.2], [5.6, 2.8], [7.7, 2.8], [6.3, 2.7], [6.7, 3.3], [7.2, 3.2], [6.2, 2.8], [6.1, 3.0], [6.4, 2.8], [7.2, 3.0], [7.4, 2.8], [7.9, 3.8], [6.4, 2.8], [6.3, 2.8], [6.1, 2.6], [7.7, 3.0], [6.3, 3.4], [6.4, 3.1], [6.0, 3.0], [6.9, 3.1], [6.7, 3.1], [6.9, 3.1], [5.8, 2.7], [6.8, 3.2], [6.7, 3.3], [6.7, 3.0], [6.3, 2.5], [6.5, 3.0], [6.2, 3.4], [5.9, 3.0]])
 
 def kirikanan_garis(arr, p1, pn, px):
     '''Memeriksa apakah sebuah titik berada di sebelah kiri atau
-    kanan garis. Bila sebelah kiri maka hasil positif menggunakan
-    penentuan determinan'''
+    kanan garis menggunakan penentuan determinan. Bila sebelah
+    kiri maka hasil positif, kanan negatif, di garis 0.'''
 
     x1 = arr[p1][0]; y1 = arr[p1][1]; x2 = arr[pn][0]; y2 = arr[pn][1]; x3 = arr[px][0]; y3 = arr[px][1]
 
     return x1*y2 + x3*y1 + x2*y3 - x3*y2 - x2*y1 - x1*y3
 
 
-def jarak(arr, p1, pn, px):
-    '''Memeriksa jarak titik px ke garis p1, pn'''
-
-    x1 = arr[p1][0]; y1 = arr[p1][1]; x2 = arr[pn][0]; y2 = arr[pn][1]; x3 = arr[px][0]; y3 = arr[px][1]
-    
-    return abs(((x2-x1)*(y1-y3)-(x1-x3)*(y2-y1))/math.sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1)))
-
 def sudut(a, b, c):
-    '''Mengembalikan sudut dari segitiga ABC dengan B sudut yang terapit'''
+    '''Mengembalikan sudut dari segitiga ABC dengan B sudut yang
+    terapit.'''
 
-    # https://manivannan-ai.medium.com/find-the-angle-between-three-points-from-2d-using-python-348c513e2cd
+    # cos theta = ba.bc / |ba|*|bc|
     ba = a - b; bc = c - b
+    cosine = np.dot(ba, bc)/(np.linalg.norm(ba)*np.linalg.norm(bc))
 
-    cosine_angle = np.dot(ba, bc)/(np.linalg.norm(ba)*np.linalg.norm(bc))
-    return np.degrees(np.arccos(cosine_angle))
+    return np.degrees(np.arccos(cosine))
 
-
-# def sudut(a, b, c):
-#     ang = math.degrees(math.atan2(c[1]-b[1], c[0]-b[0]) - math.atan2(a[1]-b[1], a[0]-b[0]))
-#     return ang + 360 if ang < 0 else ang
 
 def minmax_x(arr_np):
-    '''Mengembalikan indeks koordinat yang memiliki nilai x minimal atau maximal'''
+    """Mengembalikan tuple indeks titik dengan nilai x minimal
+    dan maksimal."""
 
+    # Mencari nilai x minimal atau maksimal
     x_coordinates = []
     for i in range(len(arr_np)):
         x_coordinates.append(arr_np[i][0])
     x_min = min(x_coordinates)
     x_max = max(x_coordinates)
 
+    # Menentukan indeks dengan x minimal
     min_index = 0
     found = True
     while min_index < len(arr_np) and found:
@@ -51,6 +40,7 @@ def minmax_x(arr_np):
             found = False
         else: min_index += 1
         
+    # Menentukan indeks dengan x maksimal
     max_index = 0
     found = True
     while (max_index < len(arr_np) and found):
@@ -62,6 +52,11 @@ def minmax_x(arr_np):
 
 
 def convexhull(arr):
+    """Mengembalikan hasil pasang titik garis pembentuk bidang
+    convex hull. Fungsi juga langkah pertama algoritma divide
+    and conquer convex hull dengan membagi titik-titik menjadi
+    kiri/kanan garis minimal/maksimal x."""
+
     arr_used = np.array(arr).astype(float)
     
     # Cari p1 dan pn terluar
@@ -75,57 +70,50 @@ def convexhull(arr):
         elif kirikanan_garis(arr_used, p1, pn, i) < 0 and i != p1 and i != pn:
             right_arr.append(i)
 
-    a = recursive(arr_used, left_arr, p1, pn, True)
-    b = recursive(arr_used, right_arr, pn, p1, False)
-    return a+b
+    # Masuk fungsi rekursi convex hull kiri garis
+    kiri = convexhull_recursive(arr_used, left_arr, p1, pn)
+    # Masuk fungsi rekursi convex hull kanan garis
+    kanan = convexhull_recursive(arr_used, right_arr, pn, p1)
+    return kiri + kanan
 
-def recursive(arr_used, arr, p1, pn, kirikanan):
-    # print(p1, pn)
-    # print(arr)
+def convexhull_recursive(arr_used, arr, p1, pn):
+    """Fungsi rekursif penentu pasangan indeks titik garis
+    pembentuk bidang convex hull pada sisi garis dengan arr
+    array titik pada sisi garis."""
+
+    # Basis: tidak ada titik di sisi garis
     if len(arr) == 0:
+        # Memastikan pasangan titik tidak sama
         if p1 != pn:
             return [[p1, pn]]
         else:
             return []
-    else:
+    else:   # Rekursi: terdapat titik di sisi garis
+        # Menentukan besar sudut p1-titik-pn untuk setiap titik
         degrees = []
         for i in range(len(arr)):
-            print(arr_used[p1], arr_used[pn], arr_used[arr[i]])
+            # Memastikan ketiga titik sudut tidak sama agar
+            # tidak error pembagian dibagi 0
             if p1 != pn and p1 != arr[i] and pn != arr[i]:
                 tempdeg = sudut(arr_used[pn], arr_used[p1], arr_used[arr[i]])
             else:
                 tempdeg = 0
-                # tempdeg = sudut(arr_used[arr[i]], arr_used[p1], arr_used[pn])
-            print(kirikanan, tempdeg)
             degrees.append(tempdeg)
+        # Menentukan indeks titik dengan derajat terbesar
         px = arr[degrees.index(max(degrees))]
-        # print(px)
 
+        # Rekursi titik-titik pada kiri garis p1-titik
         p1px = []
         for i in range(len(arr)):
             if kirikanan_garis(arr_used, p1, px, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
                 p1px.append(arr[i])
-        # print(p1px)
+        p1titik = convexhull_recursive(arr_used, p1px, p1, px)
 
+        # Rekursi titik-titik pada kiri garis titik-pn
         pxpn = []
         for i in range(len(arr)):
             if kirikanan_garis(arr_used, px, pn, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
                 pxpn.append(arr[i])
-        # print(pxpn)
-        # print()
+        titikpn = convexhull_recursive(arr_used, pxpn, px, pn)
 
-        a = recursive(arr_used, p1px, p1, px, kirikanan)
-        b = recursive(arr_used, pxpn, px, pn, kirikanan)
-
-        return a+b
-
-
-    # print(px)
-    # print(p1, pn)
-    # print(left_arr)
-    # print()
-    # print(degrees)
-    # print()
-    # print(right_arr)
-
-# convexhull(ayy)
+        return p1titik + titikpn
