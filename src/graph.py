@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
-from convexhull import convexhull
+from myConvexHull import myConvexHull
 import random
 
-def plotcolor(n):
-    '''Mengembalikan warna-warna sebanyak n'''
+def plotColor(n):
+    '''Generasi warna sebanyak n'''
     colors = ['b','r','g','c','m','y','k']
     if n > len(colors):
         for i in (range(n-len(colors))):
@@ -21,7 +21,7 @@ def graph(df, graphtitle, xlabel, ylabel, xrow, yrow, labelnames, outputname):
 
     plt.figure(figsize = (10, 6))
     labelsize = len(df['label'].unique())
-    colors = plotcolor(labelsize)
+    colors = plotColor(labelsize)
 
     plt.title(graphtitle)
     plt.xlabel(xlabel)
@@ -32,7 +32,7 @@ def graph(df, graphtitle, xlabel, ylabel, xrow, yrow, labelnames, outputname):
         bucket = bucket.iloc[:,[xrow,yrow]].values
 
         # Implementasi algoritma divide and conquer Convex Hull
-        hull = convexhull(bucket)
+        hull = myConvexHull(bucket)
 
         plt.scatter(bucket[:, 0], bucket[:, 1], label=labelnames[i], color=colors[i])
         for simplex in hull:

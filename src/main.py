@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from graph import graph
 
@@ -9,6 +10,10 @@ def attributePair(df, data, x, y):
     print(f"Your convex hull graph of {data.feature_names[x]} vs. {data.feature_names[y]} has successfully been made at file {output}!")
 
 if __name__ == "__main__":
+    # Make test folder for graph output
+    if not os.path.exists('test'):
+        os.makedirs('test')
+
     print("================================================")
     print("    WELCOME TO AFAN'S CONVEX HULL GENERATOR!")
     print("================================================\n")

@@ -1,6 +1,6 @@
 import numpy as np
 
-def kirikanan_garis(arr, p1, pn, px):
+def kiriKananGaris(arr, p1, pn, px):
     '''Memeriksa apakah sebuah titik berada di sebelah kiri atau
     kanan garis menggunakan penentuan determinan. Bila sebelah
     kiri maka hasil positif, kanan negatif, di garis 0.'''
@@ -24,7 +24,7 @@ def sudut(a, b, c):
     return np.degrees(np.arccos(cosine))
 
 
-def minmax_x(arr_np):
+def minMax(arr_np):
     """Mengembalikan tuple indeks titik dengan nilai x minimal
     dan maksimal."""
 

@@ -1,6 +1,6 @@
 from geometry import *
 
-def convexhull(arr):
+def myConvexHull(arr):
     """Mengembalikan hasil pasang titik garis pembentuk bidang
     convex hull. Fungsi juga langkah pertama algoritma divide
     and conquer convex hull dengan membagi titik-titik menjadi
@@ -9,24 +9,24 @@ def convexhull(arr):
     arr_used = np.array(arr).astype(float)
     
     # Cari p1 dan pn terluar
-    p1, pn = minmax_x(arr_used)
+    p1, pn = minMax(arr_used)
     
     # Bagi menjadi kiri dan kanan garis p1, pn
     left_arr = []; right_arr = []
     for i in range(len(arr_used)):
-        if kirikanan_garis(arr_used, p1, pn, i) > 0 and i != p1 and i != pn:
+        if kiriKananGaris(arr_used, p1, pn, i) > 0 and i != p1 and i != pn:
             left_arr.append(i)
-        elif kirikanan_garis(arr_used, p1, pn, i) < 0 and i != p1 and i != pn:
+        elif kiriKananGaris(arr_used, p1, pn, i) < 0 and i != p1 and i != pn:
             right_arr.append(i)
 
     # Masuk fungsi rekursi convex hull kiri garis
-    kiri = convexhull_recursive(arr_used, left_arr, p1, pn)
+    kiri = myConvexHullRecursive(arr_used, left_arr, p1, pn)
     # Masuk fungsi rekursi convex hull kanan garis
-    kanan = convexhull_recursive(arr_used, right_arr, pn, p1)
+    kanan = myConvexHullRecursive(arr_used, right_arr, pn, p1)
     return kiri + kanan
 
 
-def convexhull_recursive(arr_used, arr, p1, pn):
+def myConvexHullRecursive(arr_used, arr, p1, pn):
     """Fungsi rekursif penentu pasangan indeks titik garis
     pembentuk bidang convex hull pada sisi garis dengan arr
     array titik pada sisi garis."""
@@ -55,15 +55,15 @@ def convexhull_recursive(arr_used, arr, p1, pn):
         # Rekursi titik-titik pada kiri garis p1-titik
         p1px = []
         for i in range(len(arr)):
-            if kirikanan_garis(arr_used, p1, px, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
+            if kiriKananGaris(arr_used, p1, px, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
                 p1px.append(arr[i])
-        p1titik = convexhull_recursive(arr_used, p1px, p1, px)
+        p1titik = myConvexHullRecursive(arr_used, p1px, p1, px)
 
         # Rekursi titik-titik pada kiri garis titik-pn
         pxpn = []
         for i in range(len(arr)):
-            if kirikanan_garis(arr_used, px, pn, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
+            if kiriKananGaris(arr_used, px, pn, arr[i]) > 0 and arr[i] != p1 and arr[i] != pn:
                 pxpn.append(arr[i])
-        titikpn = convexhull_recursive(arr_used, pxpn, px, pn)
+        titikpn = myConvexHullRecursive(arr_used, pxpn, px, pn)
 
         return p1titik + titikpn
