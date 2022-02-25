@@ -71,7 +71,7 @@ Your convex hull graph of sepal length (cm) vs. sepal width (cm) has successfull
 If for example the filename is output, then you can now go see the resulting graph of the convex hull in the file `test/output.png`.
 
 Et Voilà!
-
+![output](https://user-images.githubusercontent.com/70305222/155628870-f4d8e66e-efd0-4f5d-8c9b-f07f66fe5192.png)
 
 You can proceed to choose to restart or end the program.
 
