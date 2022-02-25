@@ -9,6 +9,7 @@ with <i>Divide and Conquer</i> Algorithm
 * [General Information](#general-information)
 * [Requirement and Installation](#requirement-and-installation)
 * [How to Run](#how-to-run)
+* [Example Program Usage](#example-program-usage)
 * [Contact](#contact)
 
 ## General Information
@@ -43,7 +44,8 @@ Then, to run the program:
 python src/main.py
 ```
 
-You should be presented with the following print:
+## Example Program Usage
+Once you run the program, you should be presented with the following print:
 ```
 ================================================
     WELCOME TO AFAN'S CONVEX HULL GENERATOR!
@@ -71,7 +73,7 @@ Your input (1-4): _
 ```
 Type the attribute for the x coordinate, for example picking `sepal length (cm)` by typing 1. 
 ```
-Choose attribute for y (make sure it is different from 1. sepal width (cm)):
+Choose attribute for y (make sure it is different from 1. sepal length (cm)):
 1. sepal length (cm)
 2. sepal width (cm)
 3. petal length (cm)

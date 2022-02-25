@@ -52,7 +52,7 @@ if __name__ == "__main__":
                 print(f"{i+1}. {data.feature_names[i]}")
             x = int(input(f"Your input (1-{attributeLen}): "))
 
-            print(f"\nChoose attribute for y (make sure it is different from {x}. {data.feature_names[x]}):")
+            print(f"\nChoose attribute for y (make sure it is different from {x}. {data.feature_names[x-1]}):")
             for i in range(attributeLen):
                 print(f"{i+1}. {data.feature_names[i]}")
             y = int(input(f"Your input (1-{attributeLen}): "))
