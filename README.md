@@ -24,8 +24,7 @@ Python 3 is used to run the program and library so make sure it is installed. If
 Make sure ```python``` and ```pip``` is added to the PATH environment variable. If they are not, follow the guides <a href="http://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages">here</a> and <a href="http://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command">here</a>.
 
 If you have not installed the modules <b>matplotlib</b>, <b>numpy</b>, <b>pandas</b>, and <b>scikit-learn</b> needed to run the program and library, install them first by using ```pip```.
-
-Assuming you have cloned this repository (if not, follow the instructions in the next section), you can also install the modules using this command in the root folder of the repository:
+ Assuming you have cloned this repository (if not, follow the instructions in the next section), you can also install the modules using this command in the root folder of the repository:
 ```
 pip install -r requirements.txt
 ```
@@ -35,7 +34,9 @@ First, clone the repository:
 ```
 git clone https://github.com/blueguy42/Convex-Hull-Algorithm.git
 ```
-Make sure you are in the root directory of the repository.
+The <b>convex hull</b> library is available for use at `src/myConvexHull.py`. 
+
+If you want to run the accompanying program, make sure you are currently in the root directory of the repository.
 
 Then, to run the program:
 ```
