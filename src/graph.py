@@ -14,7 +14,7 @@ def plotColor(n):
     return colors
 
 
-def graph(df, graphtitle, xlabel, ylabel, xrow, yrow, labelnames, outputname):
+def graph(df, data, graphtitle, xlabel, ylabel, xrow, yrow, labelnames):
     '''Memvisualisasikan grafik hasil convex hull dengan memplot
     titik-titik dan garis convex hull dan menyimpannya pada folder
     test'''
@@ -39,6 +39,16 @@ def graph(df, graphtitle, xlabel, ylabel, xrow, yrow, labelnames, outputname):
             plt.plot(bucket[simplex, 0], bucket[simplex, 1], color=colors[i])
     
     plt.legend()
-
-    # Menyimpan grafik ke folder test
-    plt.savefig('test/' + outputname)
+    print("\nShowing graph of convex hull...")
+    print("Make sure to close the graph pop-up so the program can continue!")
+    fig1 = plt.gcf()
+    plt.show()
+    
+    outputcondition = input("\nWould you like to save the convex hull graph? (Y/N): ")
+        
+    if outputcondition.upper() == "Y":
+        output = input("\nOutput file name: ") + ".png"
+        fig1.savefig('test/' + output)
+        print(f"Your convex hull graph of {data.feature_names[xrow]} vs. {data.feature_names[yrow]} at {output} has successfully been made at folder test!")
+    plt.close('all')
+    
