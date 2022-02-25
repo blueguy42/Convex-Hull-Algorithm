@@ -39,7 +39,7 @@ def graph(df, data, graphtitle, xlabel, ylabel, xrow, yrow, labelnames):
             plt.plot(bucket[simplex, 0], bucket[simplex, 1], color=colors[i])
     
     plt.legend()
-    print("\nShowing graph of convex hull...")
+    print(f"\nShowing convex hull graph of {xlabel} vs. {ylabel}")
     print("Make sure to close the graph pop-up so the program can continue!")
     fig1 = plt.gcf()
     plt.show()

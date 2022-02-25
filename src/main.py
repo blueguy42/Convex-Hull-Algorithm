@@ -27,75 +27,40 @@ if __name__ == "__main__":
         print("4. Breast cancer wisconsin dataset")
         dataset_choose = int(input("Your input (1-4): "))
         
-        if dataset_choose == 1:
-            # Load dataset iris
+        if 1 <= dataset_choose <= 4:
             from sklearn import datasets
-            data = datasets.load_iris()
+            if dataset_choose == 1:
+                # Load dataset iris
+                data = datasets.load_iris()
+            elif dataset_choose == 2:
+                # Load dataset wine
+                data = datasets.load_wine()
+            elif dataset_choose == 3:
+                # Load dataset digits
+                data = datasets.load_digits()
+            elif dataset_choose == 4:
+                # Load dataset breast cancer wisconsin
+                data = datasets.load_breast_cancer()
+
             df = pd.DataFrame(data.data, columns=data.feature_names)
             df['label'] = pd.DataFrame(data.target)
+            attributeLen = len(data.feature_names)
 
             # Pilih pasangan atribut untuk dijadikan koordinat x,y
-            print("\nChoose pair of attributes:")
-            for i in range(2):
-                print(f"{i+1}. {data.feature_names[2*i]} vs. {data.feature_names[2*i+1]}")
-            attribute_choose = int(input("Your input (1-2): "))
+            print("\nChoose attribute for x:")
+            for i in range(attributeLen):
+                print(f"{i+1}. {data.feature_names[i]}")
+            x = int(input(f"Your input (1-{attributeLen}): "))
 
-            if 1 <= attribute_choose <= 2:
-                attributePair(df, data, 2*(attribute_choose-1), 2*(attribute_choose-1)+1)
+            print(f"\nChoose attribute for y (make sure it is different from {x}. {data.feature_names[x]}):")
+            for i in range(attributeLen):
+                print(f"{i+1}. {data.feature_names[i]}")
+            y = int(input(f"Your input (1-{attributeLen}): "))
+
+            if 1 <= x <= attributeLen and 1 <= y <= attributeLen and x != y:
+                attributePair(df, data, x-1, y-1)
             else:
-                print("Invalid attribute pair input (1-2)!")
-
-        elif dataset_choose == 2:
-            # Load dataset wine
-            from sklearn import datasets
-            data = datasets.load_wine()
-            df = pd.DataFrame(data.data, columns=data.feature_names)
-            df['label'] = pd.DataFrame(data.target)
-
-            # Pilih pasangan atribut untuk dijadikan koordinat x,y
-            print("\nChoose pair of attributes:")
-            for i in range(12):
-                print(f"{i+1}. {data.feature_names[i]} vs. {data.feature_names[i+1]}")
-            attribute_choose = int(input("Your input (1-12): "))
-
-            if 1 <= attribute_choose <= 12:
-                attributePair(df, data, attribute_choose-1, attribute_choose)
-            else:
-                print("Invalid attribute pair input (1-12)!")
-        elif dataset_choose == 3:
-            # Load dataset digits
-            from sklearn import datasets
-            data = datasets.load_digits()
-            df = pd.DataFrame(data.data, columns=data.feature_names)
-            df['label'] = pd.DataFrame(data.target)
-
-            # Pilih pasangan atribut untuk dijadikan koordinat x,y
-            print("\nChoose pair of attributes:")
-            for i in range(63):
-                print(f"{i+1}. {data.feature_names[i]} vs. {data.feature_names[i+1]}")
-            attribute_choose = int(input("Your input (1-63): "))
-
-            if 1 <= attribute_choose <= 63:
-                attributePair(df, data, attribute_choose-1, attribute_choose)
-            else:
-                print("Invalid attribute pair input (1-63)!")
-        elif dataset_choose == 4:
-            # Load dataset breast cancer wisconsin
-            from sklearn import datasets
-            data = datasets.load_breast_cancer()
-            df = pd.DataFrame(data.data, columns=data.feature_names)
-            df['label'] = pd.DataFrame(data.target)
-
-            # Pilih pasangan atribut untuk dijadikan koordinat x,y
-            print("\nChoose pair of attributes:")
-            for i in range(29):
-                print(f"{i+1}. {data.feature_names[i]} vs. {data.feature_names[i+1]}")
-            attribute_choose = int(input("Your input (1-29): "))
-
-            if 1 <= attribute_choose <= 29:
-                attributePair(df, data, attribute_choose-1, attribute_choose)
-            else:
-                print("Invalid attribute pair input (1-29)!")
+                print(f"Invalid attribute pair input x: {x} y: {y}!")
         else:
             print("\nInvalid dataset input (1-4)!")
 

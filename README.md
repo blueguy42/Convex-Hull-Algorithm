@@ -14,8 +14,9 @@ with <i>Divide and Conquer</i> Algorithm
 ## General Information
 This is a simple library to find the convex hull, the smallest convex set, of a set of points in a 2D space by using <b>divide and conquer</b> approach. An accompanying program is available to use the library. The input of the program are the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris">iris</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">wine</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits">digits</a>, and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">breast cancer wisconsin</a> datasets available from scikit-learn's toy datasets. 
 
-The algorithm first divides the points into two sections separated by a line connecting the 2 furthest x-coordinate points, say p<sub>1</sub> with minimum x value and p<sub>n</sub> with maximum x value and the top section S<sub>1</sub> and bottom S<sub>2</sub>. Then, it finds a new point in a section for each 2 side with the greatest angle from the side's starting point. For S<sub>1</sub> it is p<sub>1</sub> and S<sub>2</sub> it is p<sub>n</sub>. 
-This point then divides the section into further subsections which then recursively find their inner greatest angle points until there are no more points to be chosen. These greatest angle points become the corners of sides of the convex hull.
+The algorithm first divides the points into two sections separated by a line connecting the 2 furthest x-coordinate points, say p<sub>1</sub> with minimum x value and p<sub>n</sub> with maximum x value and the top section S<sub>1</sub> and bottom S<sub>2</sub>. Then, it finds a new point in a section for each 2 side with the greatest angle from the side's starting point. For S<sub>1</sub> it is p<sub>1</sub> and S<sub>2</sub> it is p<sub>n</sub>. This point then divides the section into further subsections which then recursively find their inner greatest angle points until there are no more points to be chosen. These greatest angle points become the corners of sides of the convex hull.
+
+The program shows the graph of the resulting convex hull and allows the user to save the graph to a PNG image in the `test` folder.
 
 ## Requirements and Installation
 Python 3 is used to run the program and library so make sure it is installed. If it is not, download it first <a href="http://www.python.org/downloads/">here.</a>
@@ -56,18 +57,31 @@ Choose dataset to use:
 2. Wine dataset
 3. Digits dataset
 4. Breast cancer wisconsin dataset
-Your input (1-4): 
+Your input (1-4): _
 ```
 Type the number of the dataset you want to use, for example the `iris dataset` by typing 1:
 ```
-Choose pair of attributes:
-1. sepal length (cm) vs. sepal width (cm)
-2. petal length (cm) vs. petal width (cm)
-Your input (1-2):
+Choose attribute for x:
+1. sepal length (cm)
+2. sepal width (cm)
+3. petal length (cm)
+4. petal width (cm)
+Your input (1-4): _
 ```
-Type the pair of attributes you want to find the convex hull for, for example picking `sepal length (cm) vs. sepal width (cm)` by typing 1. The graph of the convex hull will be shown. 
+Type the attribute for the x coordinate, for example picking `sepal length (cm)` by typing 1. 
 ```
-Showing graph of convex hull...
+Choose attribute for y (make sure it is different from 1. sepal width (cm)):
+1. sepal length (cm)
+2. sepal width (cm)
+3. petal length (cm)
+4. petal width (cm)
+Your input (1-4): _
+```
+Type the attribute for the y coordinate that is different from the x coordinate, for example picking `sepal width (cm)` by typing 2. 
+
+The graph of the convex hull of `sepal length (cm) vs. sepal width (cm)` will be shown. 
+```
+Showing convex hull graph of sepal length (cm) vs. sepal width (cm)
 Make sure to close the graph pop-up so the program can continue!
 ```
 Close the graph so the program can continue. You have the option to save the graph to an output image.
