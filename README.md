@@ -12,19 +12,19 @@ with <i>Divide and Conquer</i> Algorithm
 * [Contact](#contact)
 
 ## General Information
-This is a simple program to find the convex hull, the smallest convex set, of a set of points in a 2D space by using <b>divide and conquer</b> approach. The input of the program are the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris">iris</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">wine</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits">digits</a>, and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">breast cancer wisconsin</a> datasets available from scikit-learn's toy datasets. 
+This is a simple library to find the convex hull, the smallest convex set, of a set of points in a 2D space by using <b>divide and conquer</b> approach. An accompanying program is available to use the library. The input of the program are the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html#sklearn.datasets.load_iris">iris</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">wine</a>, <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html#sklearn.datasets.load_digits">digits</a>, and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine">breast cancer wisconsin</a> datasets available from scikit-learn's toy datasets. 
 
-The program first divides the points into two sections separated by a line connecting the 2 furthest x-coordinate points, say p<sub>1</sub> with minimum x value and p<sub>n</sub> with maximum x value and the top section S<sub>1</sub> and bottom S<sub>2</sub>. Then, it finds a new point in a section for each 2 side with the greatest angle from the side's starting point. For S<sub>1</sub> it is p<sub>1</sub> and S<sub>2</sub> it is p<sub>n</sub>. 
+The algorithm first divides the points into two sections separated by a line connecting the 2 furthest x-coordinate points, say p<sub>1</sub> with minimum x value and p<sub>n</sub> with maximum x value and the top section S<sub>1</sub> and bottom S<sub>2</sub>. Then, it finds a new point in a section for each 2 side with the greatest angle from the side's starting point. For S<sub>1</sub> it is p<sub>1</sub> and S<sub>2</sub> it is p<sub>n</sub>. 
 This point then divides the section into further subsections which then recursively find their inner greatest angle points until there are no more points to be chosen. These greatest angle points become the corners of sides of the convex hull.
 
 ## Requirements and Installation
-Python 3 is used to run the program so make sure it is installed. If it is not, download it first <a href="http://www.python.org/downloads/">here.</a>
+Python 3 is used to run the program and library so make sure it is installed. If it is not, download it first <a href="http://www.python.org/downloads/">here.</a>
 
 Make sure ```python``` and ```pip``` is added to the PATH environment variable. If they are not, follow the guides <a href="http://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages">here</a> and <a href="http://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command">here</a>.
 
-If you have not installed the libraries <b>matplotlib</b>, <b>numpy</b>, <b>pandas</b>, and <b>scikit-learn</b> needed to run the program, install them first by using ```pip```.
+If you have not installed the modules <b>matplotlib</b>, <b>numpy</b>, <b>pandas</b>, and <b>scikit-learn</b> needed to run the program and library, install them first by using ```pip```.
 
-Assuming you have cloned this repository (if not, follow the instructions in the next section), you can also install the libraries using this command in the root folder of the repository:
+Assuming you have cloned this repository (if not, follow the instructions in the next section), you can also install the modules using this command in the root folder of the repository:
 ```
 pip install -r requirements.txt
 ```
