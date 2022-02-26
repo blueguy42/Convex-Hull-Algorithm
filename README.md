@@ -19,7 +19,7 @@ The algorithm first divides the points into two sections separated by a line con
 
 The program shows the graph of the resulting convex hull and allows the user to save the graph to a PNG image in the `test` folder.
 
-## Requirements and Installation
+## Requirement and Installation
 Python 3 is used to run the program and library so make sure it is installed. If it is not, download it first <a href="http://www.python.org/downloads/">here.</a>
 
 Make sure ```python``` and ```pip``` is added to the PATH environment variable. If they are not, follow the guides <a href="http://stackoverflow.com/questions/3701646/how-to-add-to-the-pythonpath-in-windows-so-it-finds-my-modules-packages">here</a> and <a href="http://stackoverflow.com/questions/23708898/pip-is-not-recognized-as-an-internal-or-external-command">here</a>.
