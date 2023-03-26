@@ -1,6 +1,6 @@
 # Convex Hull Generator
 
-Tugas Kecil 2 IF2211 Strategi Algoritma Semester II Tahun 2021/2022
+IF2211 Algorithm Strategy: Minor Assignment 2, Semester II 2021/2022.
 
 Implementation of Convex Hull to Visualize <i>Linear Separability Dataset Test</i>
 with <i>Divide and Conquer</i> Algorithm
